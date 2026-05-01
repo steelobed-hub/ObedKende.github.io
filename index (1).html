@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obed Kende — Marketing Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --gold: #c9973a;
+    --gold-light: #e8bc6a;
+    --deep: #1a1410;
+    --text-muted: #8a7e72;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,151,58,0.15); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); text-decoration: none; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 8rem 3rem 4rem; position: relative; overflow: hidden; gap: 4rem; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(201,151,58,0.12) 0%, transparent 70%); }
+  .hero-grid { position: absolute; inset: 0; z-index: 0; opacity: 0.04; background-image: linear-gradient(rgba(201,151,58,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(201,151,58,0.8) 1px, transparent 1px); background-size: 60px 60px; }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.9; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1.5rem; }
+  h1 span { color: var(--gold); }
+  .hero-sub { font-family: 'Playfair Display', serif; font-size: clamp(0.95rem, 2vw, 1.2rem); font-style: italic; color: var(--text-muted); max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem; }
+  .hero-ctas { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--gold); color: var(--black); padding: 0.85rem 2.2rem; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.2s; display: inline-block; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline { border: 1px solid rgba(201,151,58,0.5); color: var(--gold); padding: 0.85rem 2.2rem; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: border-color 0.2s, background 0.2s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,151,58,0.08); }
+  .hero-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem; }
+
+  .hero-photo-wrap { position: relative; z-index: 1; animation: fadeUp 1s 0.3s ease both; }
+  .hero-photo-wrap img { width: 100%; max-width: 480px; height: 580px; object-fit: cover; object-position: top; display: block; }
+  .hero-photo-wrap::before { content: ''; position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px; border: 2px solid var(--gold); z-index: -1; }
+
+  section { padding: 6rem 3rem; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::after { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: 0.03em; line-height: 1; margin-bottom: 1rem; }
+  .section-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,151,58,0.3), transparent); margin: 0 0 4rem; }
+
+  #about { background: var(--deep); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1100px; margin: 0 auto; align-items: start; }
+  .about-text p { font-size: 1.05rem; line-height: 1.85; color: rgba(245,240,232,0.8); margin-bottom: 1.4rem; }
+  .about-text p strong { color: var(--gold); font-weight: 500; }
+  .about-highlights { display: flex; flex-direction: column; gap: 1.5rem; }
+  .highlight-card { border: 1px solid rgba(201,151,58,0.2); padding: 1.5rem; background: rgba(201,151,58,0.04); transition: border-color 0.3s; }
+  .highlight-card:hover { border-color: rgba(201,151,58,0.5); }
+  .highlight-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 0.4rem; }
+  .highlight-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+  #experience { background: var(--black); }
+  .exp-container { max-width: 1100px; margin: 0 auto; }
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .exp-card { border: 1px solid rgba(255,255,255,0.07); padding: 2rem; background: rgba(255,255,255,0.02); transition: border-color 0.3s, transform 0.3s; position: relative; overflow: hidden; }
+  .exp-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height 0.4s ease; }
+  .exp-card:hover::before { height: 100%; }
+  .exp-card:hover { border-color: rgba(201,151,58,0.3); transform: translateY(-3px); }
+  .exp-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); background: rgba(201,151,58,0.1); padding: 0.3rem 0.7rem; display: inline-block; margin-bottom: 0.8rem; }
+  .exp-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.3rem; }
+  .exp-company { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .exp-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-card ul li { font-size: 0.88rem; color: rgba(245,240,232,0.7); line-height: 1.5; padding-left: 1rem; position: relative; }
+  .exp-card ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; }
+
+  #projects { background: var(--deep); }
+  .projects-container { max-width: 1100px; margin: 0 auto; }
+  .project-featured { display: grid; grid-template-columns: 1.2fr 1fr; border: 1px solid rgba(201,151,58,0.25); margin-bottom: 2rem; overflow: hidden; }
+  .project-featured-content { padding: 3rem; }
+  .project-featured-visual { background: linear-gradient(135deg, rgba(201,151,58,0.15), rgba(201,151,58,0.05)); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 3rem; gap: 1.5rem; border-left: 1px solid rgba(201,151,58,0.2); }
+  .metric-block { text-align: center; }
+  .metric-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--gold); line-height: 1; }
+  .metric-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.3rem; }
+  .metric-divider { width: 1px; height: 40px; background: rgba(201,151,58,0.3); }
+  .project-badge { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 0.3rem 0.8rem; display: inline-block; margin-bottom: 1rem; }
+  .project-featured-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .project-org { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .project-featured-content p { font-size: 0.92rem; line-height: 1.75; color: rgba(245,240,232,0.75); margin-bottom: 1.2rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 0.3rem 0.7rem; }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .project-card { border: 1px solid rgba(255,255,255,0.07); padding: 2rem; background: rgba(255,255,255,0.02); transition: border-color 0.3s; }
+  .project-card:hover { border-color: rgba(201,151,58,0.3); }
+  .project-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .project-card p { font-size: 0.88rem; line-height: 1.65; color: rgba(245,240,232,0.7); margin: 0.6rem 0 1rem; }
+
+  #leadership { background: var(--black); }
+  .leadership-container { max-width: 1100px; margin: 0 auto; }
+  .leadership-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem; align-items: center; }
+  .leadership-intro-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; color: var(--gold); margin-bottom: 0.3rem; }
+  .leadership-intro-text .role { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.2rem; }
+  .leadership-intro-text p { font-size: 0.92rem; line-height: 1.75; color: rgba(245,240,232,0.75); }
+  .group-photo-wrap { position: relative; }
+  .group-photo-wrap img { width: 100%; height: 360px; object-fit: cover; object-position: top; display: block; }
+  .group-photo-wrap::after { content: 'AFRICAN STUDENTS UNITED · UNC GREELEY'; position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: var(--gold); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 2rem 1rem 0.8rem; }
+
+  .events-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .events-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+  .event-card { position: relative; overflow: hidden; }
+  .event-card img { width: 100%; height: 280px; object-fit: cover; display: block; transition: transform 0.4s ease, filter 0.3s; filter: brightness(0.85); }
+  .event-card:hover img { transform: scale(1.04); filter: brightness(1); }
+  .event-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.85)); padding: 2rem 1.2rem 1.2rem; }
+  .event-overlay h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.06em; color: var(--white); margin-bottom: 0.2rem; }
+  .event-overlay p { font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .toa-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.2rem; }
+  .toa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .toa-grid img { width: 100%; height: 340px; object-fit: cover; object-position: center top; display: block; transition: filter 0.3s; }
+  .toa-grid img:hover { filter: brightness(1.1); }
+
+  #cert { background: var(--deep); }
+  .cert-container { max-width: 700px; margin: 0 auto; text-align: center; }
+  .cert-box { border: 1px solid var(--gold); padding: 3rem; position: relative; background: rgba(201,151,58,0.04); }
+  .cert-box::before, .cert-box::after { content: ''; position: absolute; width: 20px; height: 20px; border-color: var(--gold); border-style: solid; }
+  .cert-box::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+  .cert-box::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+  .cert-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .cert-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 0.3rem; }
+  .cert-issuer { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+  .cert-date { font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+  .cert-box p { font-size: 0.92rem; line-height: 1.75; color: rgba(245,240,232,0.75); margin-top: 1rem; }
+
+  #skills { background: var(--black); }
+  .skills-container { max-width: 1100px; margin: 0 auto; }
+  .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .skill-group h4 { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(201,151,58,0.2); }
+  .skill-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .skill-group ul li { font-size: 0.88rem; color: rgba(245,240,232,0.75); }
+
+  #contact { background: var(--deep); text-align: center; }
+  .contact-container { max-width: 600px; margin: 0 auto; }
+  .contact-details { display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; flex-wrap: wrap; }
+  .contact-item { font-size: 0.8rem; color: var(--text-muted); }
+  .contact-item a { color: var(--gold); text-decoration: none; }
+
+  footer { background: var(--black); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { animation: fadeUp 0.8s ease both; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.35s; }
+  .hero-ctas { animation-delay: 0.5s; }
+  .hero-stats { animation-delay: 0.6s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; }
+    .hero-photo-wrap { order: -1; }
+    .hero-photo-wrap img { height: 400px; max-width: 100%; }
+    .about-grid, .exp-grid, .project-featured, .leadership-intro, .toa-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .projects-grid, .events-gallery { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .contact-details { flex-direction: column; gap: 1rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .projects-grid, .events-gallery { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">OK</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Marketing Portfolio · University of Northern Colorado</div>
+    <h1>OBED<br><span>KENDE</span></h1>
+    <p class="hero-sub">Marketing strategist, community builder, and first-generation student with a vision rooted in purpose — and a record of making things happen.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">4+</div><div class="stat-label">Years Experience</div></div>
+      <div><div class="stat-num">5</div><div class="stat-label">Major Events Led</div></div>
+      <div><div class="stat-num">2×</div><div class="stat-label">Fluent Languages</div></div>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <img src="IMG_0734.jpeg" alt="Obed Kende at UNC">
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">About Me</div>
+      <h2>BUILT FROM<br>SCRATCH</h2>
+      <div class="section-divider"></div>
+      <div class="about-text">
+        <p>I'm a <strong>Marketing student at the University of Northern Colorado</strong>, pursuing a BS in Business Marketing. Born in the Congo and raised as a first-generation college student, I've learned to build from wherever I am — turning every role, project, and challenge into a foundation for something larger.</p>
+        <p>My marketing mindset is shaped by real-world experience: managing hotel front desks, supervising retail operations, counseling small businesses, and leading a student organization that puts African culture center stage at UNC.</p>
+        <p>I'm <strong>fluent in English and French</strong>, certified in digital marketing, and currently studying Consumer Behavior, Digital Marketing, and Small Business Counseling. My long-term goal is entrepreneurship — specifically, creating economic opportunity in Africa.</p>
+      </div>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-card"><h4>🎓 Digital Marketing Certified</h4><p>Stukent Certified — April 2026. Tested on campaign management, keyword research, data-driven decisions, and report-based strategy adjustments.</p></div>
+      <div class="highlight-card"><h4>👑 Student Organization President</h4><p>Elected President of African Students United at UNC. Led membership growth, campus visibility campaigns, and large-scale cultural events.</p></div>
+      <div class="highlight-card"><h4>📊 Real Consulting Experience</h4><p>Co-led a full consulting engagement for 477 Distilling — a real Colorado craft spirits company — developing a 90-day local growth strategy with financial modeling.</p></div>
+      <div class="highlight-card"><h4>🌍 Global Perspective</h4><p>Immigrant from the Congo. Research interest in personal branding and entrepreneurial success in emerging African economies.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="exp-container">
+    <div class="section-label">Work History</div>
+    <h2>WHERE I'VE<br>SHOWN UP</h2>
+    <div class="section-divider"></div>
+    <div class="exp-grid">
+      <div class="exp-card"><span class="exp-tag">Hospitality</span><h3>Front Desk Agent</h3><div class="exp-company">Magnolia Hotel Denver · Denver, CO</div><ul><li>Managed check-in/out, reservations, billing, and guest records</li><li>Resolved guest issues proactively, collaborating with housekeeping and maintenance</li><li>Promoted hotel services, increasing sales and guest satisfaction</li><li>Trained new front desk staff</li></ul></div>
+      <div class="exp-card"><span class="exp-tag">Retail Operations</span><h3>Shift Supervisor</h3><div class="exp-company">CVS Pharmacy · Denver, CO</div><ul><li>Managed daily operations and coordinated team workflow</li><li>Oversaw inventory replenishment and resolved operational challenges</li><li>Handled cash reconciliation and financial accuracy</li><li>Delivered customer service in a fast-paced environment</li></ul></div>
+      <div class="exp-card"><span class="exp-tag">Higher Education</span><h3>Front Desk Assistant</h3><div class="exp-company">University of Northern Colorado · Greeley, CO</div><ul><li>Managed visitor access, inquiries, and room reservations</li><li>Provided guidance on university resources, events, and amenities</li><li>Maintained records of bookings, events, and visitor data</li></ul></div>
+      <div class="exp-card"><span class="exp-tag">Education</span><h3>Substitute Teacher</h3><div class="exp-company">Kokua Education · Denver, CO</div><ul><li>Created individualized learning experiences for diverse students</li><li>Managed classroom dynamics and adapted lessons in real time</li><li>Provided meaningful feedback while maintaining classroom order</li></ul></div>
+      <div class="exp-card"><span class="exp-tag">Orientation</span><h3>Admin Assistant, New Student Orientation</h3><div class="exp-company">University of Northern Colorado · Greeley, CO</div><ul><li>Assisted in planning and scheduling orientation sessions</li><li>Managed materials, registrations, and communications</li><li>Tracked expenditures and managed orientation budgets</li></ul></div>
+      <div class="exp-card"><span class="exp-tag">Community</span><h3>Volunteer Tutor</h3><div class="exp-company">Westwood Bridge Project · Denver, CO</div><ul><li>Provided after-school support to youth in Denver public housing</li><li>Supported a program serving 100+ students with tutoring and mentorship</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="projects-container">
+    <div class="section-label">Selected Work</div>
+    <h2>STRATEGY IN<br>ACTION</h2>
+    <div class="section-divider"></div>
+    <div class="project-featured">
+      <div class="project-featured-content">
+        <span class="project-badge">⭐ Featured Project</span>
+        <h3>477 DISTILLING: LOCAL GROWTH STRATEGY</h3>
+        <div class="project-org">Elite Edge Consulting · BAMK 477 Capstone · April 2026</div>
+        <p>Led a real consulting engagement for 477 Distilling, a Colorado craft spirits company with multi-state distribution. Identified why a brand with award-winning products was underperforming in its home market and built a full 90-day strategic plan to fix it.</p>
+        <p>Delivered an integrated growth system covering local placement expansion, digital refresh, community activation events, and a signature cocktail program — with full financial modeling and a phased implementation roadmap.</p>
+        <div class="project-tags"><span class="tag">Market Analysis</span><span class="tag">Strategy</span><span class="tag">Financial Modeling</span><span class="tag">B2B Marketing</span><span class="tag">Implementation Planning</span></div>
+      </div>
+      <div class="project-featured-visual">
+        <div class="metric-block"><div class="metric-num">10–15</div><div class="metric-label">New Local Placements Projected</div></div>
+        <div class="metric-divider"></div>
+        <div class="metric-block"><div class="metric-num">+20%</div><div class="metric-label">Walk-in Traffic Target</div></div>
+        <div class="metric-divider"></div>
+        <div class="metric-block"><div class="metric-num">90</div><div class="metric-label">Day Execution Roadmap</div></div>
+      </div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card"><span class="exp-tag">Digital Marketing</span><h3>Digital Marketing Campaigns</h3><div class="project-org">BAMK 371 — Spring 2026</div><p>Applied digital marketing techniques — managing campaigns, keyword research, data-driven revenue decisions, and strategy adjustments. Earned Stukent Digital Marketing Certification.</p><div class="project-tags"><span class="tag">SEM</span><span class="tag">Analytics</span><span class="tag">Keyword Research</span></div></div>
+      <div class="project-card"><span class="exp-tag">Consumer Research</span><h3>Consumer Behavior Analysis</h3><div class="project-org">BAMK 361 — Spring 2026</div><p>Studying psychological and social factors behind purchasing behavior, and how marketers can apply these insights to more effective campaigns and brand strategies.</p><div class="project-tags"><span class="tag">Behavioral Research</span><span class="tag">Segmentation</span></div></div>
+      <div class="project-card"><span class="exp-tag">Entrepreneurship</span><h3>Small Business Counseling</h3><div class="project-org">BAMK 407 — Spring 2026</div><p>Applying marketing and business fundamentals to real small business challenges. Developing advisory skills for entrepreneurs on strategy, operations, and growth planning.</p><div class="project-tags"><span class="tag">Consulting</span><span class="tag">Business Strategy</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="leadership">
+  <div class="leadership-container">
+    <div class="section-label">Leadership</div>
+    <h2>PRESIDENT,<br>COMMUNITY BUILDER</h2>
+    <div class="section-divider"></div>
+
+    <div class="leadership-intro">
+      <div class="leadership-intro-text">
+        <h3>African Students United</h3>
+        <div class="role">President · University of Northern Colorado</div>
+        <p>Elected by peers to lead ASU — a student organization dedicated to celebrating African culture, building community, and increasing visibility for African and African American students at UNC. I've driven membership engagement, forged campus partnerships, and produced large-scale events that brought hundreds of people together.</p>
+      </div>
+      <div class="group-photo-wrap">
+        <img src="IMG_0829.jpeg" alt="ASU group photo at UNC">
+      </div>
+    </div>
+
+    <div class="events-label">Events I Planned & Led</div>
+    <div class="events-gallery">
+      <div class="event-card">
+        <img src="IMG_4398.jpeg" alt="Trunk or Treat event">
+        <div class="event-overlay"><h4>Trunk or Treat</h4><p>Community Halloween Event · ASU</p></div>
+      </div>
+      <div class="event-card">
+        <img src="IMG_4413.jpeg" alt="Trunk or Treat community">
+        <div class="event-overlay"><h4>Community Turnout</h4><p>Families & Students · Trunk or Treat</p></div>
+      </div>
+      <div class="event-card">
+        <img src="035EC402-5F79-44FF-9691-60B48D9B67A5.jpeg" alt="Sports Tournament">
+        <div class="event-overlay"><h4>Sports Tournament</h4><p>ASU Volleyball · UNC Campus</p></div>
+      </div>
+      <div class="event-card">
+        <img src="D8BD28F8-5ED0-481C-8D6E-FE6752B4B467.jpeg" alt="Women's Sports Team">
+        <div class="event-overlay"><h4>Sports Tournament</h4><p>Women's Team · UNC Rec Center</p></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 1.2rem;">
+      <div class="toa-label">Taste of Africa — Annual Cultural Showcase</div>
+      <div class="toa-grid">
+        <img src="DSC04418.jpeg" alt="Taste of Africa performance">
+        <img src="DSC04424.jpeg" alt="Taste of Africa stage">
+      </div>
+    </div>
+
+    <img src="IMG_0830.jpeg" alt="ASU community at UNC" style="width:100%; height:380px; object-fit:cover; object-position:top; display:block; margin-top:1.5rem;">
+  </div>
+</section>
+
+<section id="cert">
+  <div class="cert-container">
+    <div class="section-label" style="justify-content:center;">Credentials</div>
+    <h2 style="text-align:center; margin-bottom:2.5rem;">CERTIFIED &<br>CREDENTIALED</h2>
+    <div class="cert-box">
+      <div class="cert-icon">🏅</div>
+      <h3>DIGITAL MARKETING CERTIFICATION</h3>
+      <div class="cert-issuer">Stukent, Inc.</div>
+      <div class="cert-date">Awarded April 21, 2026</div>
+      <p>Certified in applying digital marketing techniques including campaign management, keyword research, data-driven decision-making, and report-based strategy adjustments.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="skills-container">
+    <div class="section-label">Core Competencies</div>
+    <h2>WHAT I<br>BRING</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-group"><h4>Marketing</h4><ul><li>Digital Marketing</li><li>Consumer Behavior</li><li>Campaign Management</li><li>Keyword Research</li><li>Market Analysis</li><li>Brand Strategy</li></ul></div>
+      <div class="skill-group"><h4>Strategy & Business</h4><ul><li>Consulting & Advisory</li><li>Financial Modeling</li><li>Small Business Counseling</li><li>Operations Management</li><li>Analytics & Reporting</li><li>Implementation Planning</li></ul></div>
+      <div class="skill-group"><h4>Leadership & Comms</h4><ul><li>Event Planning & Production</li><li>Team Leadership</li><li>Public Speaking</li><li>Community Engagement</li><li>Customer Service</li><li>Training & Development</li></ul></div>
+      <div class="skill-group"><h4>Languages & Other</h4><ul><li>English (Fluent)</li><li>French (Fluent)</li><li>Budget Management</li><li>Administrative Systems</li><li>Research & Writing</li><li>Cross-cultural Communication</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-container">
+    <div class="section-label" style="justify-content:center;">Contact</div>
+    <h2>LET'S<br>CONNECT</h2>
+    <p class="hero-sub" style="margin: 0 auto 2.5rem;">I'm open to full-time roles, consulting opportunities, freelance projects, and any conversation about marketing, entrepreneurship, or what I can bring to your team.</p>
+    <div class="hero-ctas" style="justify-content:center;">
+      <a href="mailto:Obedkende39@gmail.com" class="btn-primary">Send an Email</a>
+    </div>
+    <div class="contact-details">
+      <div class="contact-item">📧 <a href="mailto:Obedkende39@gmail.com">Obedkende39@gmail.com</a></div>
+      <div class="contact-item">📞 <a href="tel:7203978726">(720) 397-8726</a></div>
+      <div class="contact-item">📍 Greeley / Denver, Colorado</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Obed Kende · Marketing Portfolio</span>
+  <span style="color: var(--gold); letter-spacing:0.2em; font-size:0.7rem;">UNC · BS MARKETING · GRADUATING 2027</span>
+</footer>
+
+</body>
+</html>
